@@ -8,9 +8,9 @@
                 "D:\\_stm32\\multi_mcu_lib\\all_configs"
             ],
             "defines": [
-                "_DEBUG",
-                "UNICODE",
-                "_UNICODE"
+                "C_DEFS",
+                "USE_HAL_DRIVER",
+                "STM32F103xE"
             ],
             "compilerPath": "D:\\Program Files (x86)\\Dev-Cpp\\MinGW64\\bin\\gcc.exe",
             "cStandard": "c11",

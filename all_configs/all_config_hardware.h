@@ -1,10 +1,4 @@
-/*
- * @Author: Lin Qi Ping
- * @Date: 2021-02-01 19:37:17
- * @LastEditors: Lin Qi Ping
- * @LastEditTime: 2021-02-01 20:51:25
- * @Description: 
- */
+//选择英豪使用的外设或者硬件资源
 #define use_input_keypad
 //#define use_output_led
 

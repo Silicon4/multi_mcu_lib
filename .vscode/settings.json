@@ -1,6 +1,11 @@
 {
     "files.associations": {
         "keypad_config.h": "c",
-        "mcu_interface.h": "c"
+        "mcu_interface.h": "c",
+        "all_config.h": "c",
+        "stdint.h": "c",
+        "commen_config.h": "c",
+        "keypad.h": "c",
+        "stm32f1xx_hal.h": "c"
     }
 }
