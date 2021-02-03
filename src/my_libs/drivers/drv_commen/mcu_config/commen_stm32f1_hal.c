@@ -2,16 +2,17 @@
 #include "commen_config.h"
 #include "stdio.h"
 
-#define us_tim htim6 //用于us延时的定时器
+
 
 #ifdef mcu_stm32f1_hal
+#define us_tim htim6 //用于us延时的定时器
 
 void my_delayms(uint64_t ms)
 {
     HAL_Delay(ms);
 }
 
-extern TIM_HandleTypeDef htim6;
+extern TIM_HandleTypeDef us_tim;
 void my_delayus(uint64_t us) //如果不用systic,需要开一个定时器用于us级别延时
 {
     uint16_t differ = 0xffff - us - 5;

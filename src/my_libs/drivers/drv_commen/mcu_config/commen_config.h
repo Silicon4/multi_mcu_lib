@@ -2,9 +2,6 @@
 #include "all_config.h"
 #include "mcu_interface.h"
 
-#ifdef mcu_stm32f1_hal
-
-#endif
 
 void my_delayms(uint64_t ms);
 void my_delayus(uint64_t us);

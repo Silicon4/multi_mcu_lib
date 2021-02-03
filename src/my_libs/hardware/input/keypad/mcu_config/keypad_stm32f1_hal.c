@@ -1,6 +1,6 @@
 //stm32的中间层
 #include "keypad_config.h"
-#include "src/my_libs/drivers/mcu_interface.h"
+#include "mcu_interface.h"
 
 #ifdef use_input_keypad
 
@@ -40,8 +40,6 @@ void set_line(uint8_t line, uint8_t stat)
     }
 }
 
-
-
 uint8_t get_line(void)
 {
     uint8_t line = 4;
@@ -51,5 +49,6 @@ uint8_t get_line(void)
     if (HAL_GPIO_ReadPin(line3) == GPIO_PIN_RESET) line = 3;
     return line;
 }
+
 #endif
 #endif
