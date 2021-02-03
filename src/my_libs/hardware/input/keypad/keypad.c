@@ -2,10 +2,10 @@
 
 #ifdef use_input_keypad
 
-void keypad_int(void);
+void keypad_int(void)
 {
 
-    int i, j;
+    int i;
     for (i = 0; i < keypad_row; i++) //拉高所有IO口
     {
         set_row(i, 1);

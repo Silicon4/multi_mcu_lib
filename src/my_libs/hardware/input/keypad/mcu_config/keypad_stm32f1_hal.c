@@ -6,6 +6,8 @@
 
 #ifdef mcu_stm32f1_hal
 
+#include "main.h"
+
 #define row0  ROW0_GPIO_Port, ROW0_Pin
 #define line0 LINE0_GPIO_Port, LINE0_Pin
 #define row1  ROW1_GPIO_Port, ROW1_Pin
