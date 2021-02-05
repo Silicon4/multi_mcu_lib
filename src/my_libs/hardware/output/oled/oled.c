@@ -1,6 +1,9 @@
 #include "oled.h"
 #ifdef use_oled
+#include "oledfont.h"
 #include <string.h>
+
+extern I2C_HandleTypeDef hi2c1;
 
 uint8_t OLED_GRAM[144][8];
 
@@ -32,6 +35,14 @@ void OLED_DisplayTurn(uint8_t i)
 		}
 }
 
+//延时
+void IIC_delay(void)
+{
+	uint8_t t=3;
+	while(t--);
+}
+
+#ifdef i2c_soft
 ////起始信号
 //void I2C_Start(void)
 //{
@@ -85,13 +96,16 @@ void OLED_DisplayTurn(uint8_t i)
 //		dat<<=1;
 //  }
 //}
+#endif
 
 //发送一个字节
 //mode:数据/命令标志 0,表示命令;1,表示数据;
 void OLED_WR_Byte(uint8_t dat,uint8_t mode)
 {
     if (mode) i2c_write_byte(0x3C, 0x40, dat);//写数据
-    else i2c_write_byte(0x3C, 0x00, dat);//写命令
+    else i2c_write_byte(0x3C, 0x00, dat);//写数据
+
+#ifdef i2c_soft
 //	I2C_Start();
 //	Send_Byte(0x78);
 //	I2C_WaitAck();
@@ -101,6 +115,7 @@ void OLED_WR_Byte(uint8_t dat,uint8_t mode)
 //	Send_Byte(dat);
 //	I2C_WaitAck();
 //	I2C_Stop();
+#endif
 }
 
 //开启OLED显示 
@@ -134,7 +149,8 @@ void OLED_Refresh(void)
             //*(temp + j) = OLED_GRAM[0][i];
             temp1[j] = OLED_GRAM[j][i];
         }
-        HAL_I2C_Mem_Write(&hi2c1, 0x3C<<1, 0x40, 1, temp1, 128, 0xfff);
+        // HAL_I2C_Mem_Write(&hi2c1, 0x3C<<1, 0x40, 1, temp1, 128, 0xfff);
+		i2c_write_len(0x3C, 0x40, 1, temp1, 128);
 //      OLED_WR_Byte(OLED_GRAM[n][i], OLED_DATA);
 //		I2C_Start();
 //		Send_Byte(0x78);
@@ -450,7 +466,7 @@ void OLED_ShowPicture(uint8_t x,uint8_t y,uint8_t sizex,uint8_t sizey,uint8_t BM
 //OLED的初始化
 void OLED_Init(void)
 {   
-    HAL_Delay(200);
+    my_delayms(200);
 	OLED_WR_Byte(0xAE,OLED_CMD);//--turn off oled panel
 	OLED_WR_Byte(0x00,OLED_CMD);//---set low column address
 	OLED_WR_Byte(0x10,OLED_CMD);//---set high column address
@@ -479,5 +495,4 @@ void OLED_Init(void)
 	OLED_Clear();
 	OLED_WR_Byte(0xAF,OLED_CMD);
 }
-
 #endif
