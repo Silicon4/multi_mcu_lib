@@ -1,9 +1,14 @@
 #include "oled.h"
+#include "oled_config.h"
 #ifdef use_oled
 #include "oledfont.h"
 #include <string.h>
 
-extern I2C_HandleTypeDef hi2c1;
+#ifdef oled_spi
+extern void set_dc(uint8_t pin_stat);
+extern void set_cs(uint8_t pin_stat);
+extern void set_res(uint8_t pin_stat);
+#endif
 
 uint8_t OLED_GRAM[144][8];
 
@@ -102,8 +107,9 @@ void IIC_delay(void)
 //mode:数据/命令标志 0,表示命令;1,表示数据;
 void OLED_WR_Byte(uint8_t dat,uint8_t mode)
 {
+ #ifdef oled_i2c
     if (mode) i2c_write_byte(0x3C, 0x40, dat);//写数据
-    else i2c_write_byte(0x3C, 0x00, dat);//写数据
+     else i2c_write_byte(0x3C, 0x00, dat);//写数据
 
 #ifdef i2c_soft
 //	I2C_Start();
@@ -115,6 +121,14 @@ void OLED_WR_Byte(uint8_t dat,uint8_t mode)
 //	Send_Byte(dat);
 //	I2C_WaitAck();
 //	I2C_Stop();
+#endif
+#endif
+
+#ifdef oled_spi
+    set_cs(0);//片选信号低电平选中芯片
+    set_dc(mode);//0写命令， 1写数据
+	spi_read_write_byte(dat);
+    set_cs(1);//片选信号高电平失能
 #endif
 }
 
@@ -485,6 +499,10 @@ void OLED_Init(void)
 	OLED_WR_Byte(0x02,OLED_CMD);//
 	OLED_WR_Byte(0x8D,OLED_CMD);//--set Charge Pump enable/disable
 	OLED_WR_Byte(0x14,OLED_CMD);//--set(0x10) disable
+#ifdef oled_spi
+	OLED_WR_Byte(0xA4,OLED_CMD);// Disable Entire Display On (0xa4/0xa5)
+	OLED_WR_Byte(0xA6,OLED_CMD);// Disable Inverse Display On (0xa6/a7)
+#endif
 	OLED_Clear();
 	OLED_WR_Byte(0xAF,OLED_CMD);
 }

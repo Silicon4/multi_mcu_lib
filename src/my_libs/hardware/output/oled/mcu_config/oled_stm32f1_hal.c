@@ -1,4 +1,5 @@
 #include "oled_config.h"
+#include "spi_config.h"
 #include "i2c_config.h"
 #ifdef use_oled
 #ifdef mcu_stm32f1_hal
@@ -11,15 +12,15 @@
 
 void set_cs(uint8_t pin_stat)
 {
-    HAL_GPIO_WritePin(cs_pin, (GPIO_PinState)pin_stat);
+    HAL_GPIO_WritePin(cs_pin, pin_stat);
 }
 void set_dc(uint8_t pin_stat)
 {
-    HAL_GPIO_WritePin(dc_pin, (GPIO_PinState)pin_stat);
+    HAL_GPIO_WritePin(dc_pin, pin_stat);
 }
 void set_res(uint8_t pin_stat)
 {
-    HAL_GPIO_WritePin(res_pin, (GPIO_PinState)pin_stat);
+    HAL_GPIO_WritePin(res_pin, pin_stat);
 }
 
 #endif

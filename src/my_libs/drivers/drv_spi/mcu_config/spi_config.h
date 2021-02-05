@@ -4,4 +4,5 @@
 #ifdef use_spi
 
 uint8_t spi_read_write_byte(uint8_t tx_data);
+
 #endif

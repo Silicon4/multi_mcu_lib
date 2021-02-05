@@ -1,16 +1,18 @@
 #include "oled_config.h"
 #include "commen_config.h"
 #ifdef use_oled
-#define oled_i2c
-// #define oled_spi
 
 #ifdef oled_i2c
-#include "i2c_config.h"
+#ifndef use_i2c
+#define use_i2c
+#endif
 #include "drv_i2c.h"
 #endif
 
 #ifdef oled_spi
-#include "spi_config.h"
+#ifndef use_spi
+#define use_spi
+#endif
 #include "drv_spi.h"
 #endif
 
