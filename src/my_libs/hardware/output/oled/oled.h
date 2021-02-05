@@ -1,5 +1,19 @@
 #include "oled_config.h"
+#include "commen_config.h"
 #ifdef use_oled
+#define oled_i2c
+// #define oled_spi
+
+#ifdef oled_i2c
+#include "i2c_config.h"
+#include "drv_i2c.h"
+#endif
+
+#ifdef oled_spi
+#include "spi_config.h"
+#include "drv_spi.h"
+#endif
+
 #include "stdlib.h"
 
 #define OLED_CMD  0	//写命令

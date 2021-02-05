@@ -138,19 +138,12 @@ void OLED_DisPlay_Off(void)
 void OLED_Refresh(void)
 {
 	uint8_t i, j;
-    uint8_t temp1[128];
 	for(i=0;i<8;i++)
 	{
 		OLED_WR_Byte(0xb0+i,OLED_CMD); //设置行起始地址
 		OLED_WR_Byte(0x00,OLED_CMD);   //设置低列起始地址
 		OLED_WR_Byte(0x10,OLED_CMD);   //设置高列起始地址
-        for (j = 0; j < 128; j++)
-        {
-            //*(temp + j) = OLED_GRAM[0][i];
-            temp1[j] = OLED_GRAM[j][i];
-        }
-        // HAL_I2C_Mem_Write(&hi2c1, 0x3C<<1, 0x40, 1, temp1, 128, 0xfff);
-		i2c_write_len(0x3C, 0x40, 1, temp1, 128);
+        for(j=0;j<128;j++) OLED_WR_Byte(OLED_GRAM[j][i],OLED_DATA);
 //      OLED_WR_Byte(OLED_GRAM[n][i], OLED_DATA);
 //		I2C_Start();
 //		Send_Byte(0x78);
