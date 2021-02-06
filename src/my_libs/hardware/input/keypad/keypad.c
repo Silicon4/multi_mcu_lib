@@ -4,7 +4,14 @@
 
 void keypad_int(void)
 {
-
+    pin_config(LINE0, MODE_INPUT_PULL_UP);
+    pin_config(LINE1, MODE_INPUT_PULL_UP);
+    pin_config(LINE2, MODE_INPUT_PULL_UP);
+    pin_config(LINE3, MODE_INPUT_PULL_UP);
+    pin_config(ROW0, MODE_OUTPUT_PP_NONE);
+    pin_config(ROW1, MODE_OUTPUT_PP_NONE);
+    pin_config(ROW2, MODE_OUTPUT_PP_NONE);
+    pin_config(ROW3, MODE_OUTPUT_PP_NONE);
     int i;
     for (i = 0; i < keypad_row; i++) //拉高所有IO口
     {

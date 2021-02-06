@@ -1,8 +1,8 @@
 #include "all_config.h"
 #include "mcu_interface.h"
 
-// #define oled_i2c
-#define oled_spi
+#define oled_i2c
+// #define oled_spi
 
 #ifdef oled
 
