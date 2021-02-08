@@ -1,3 +1,6 @@
+#ifndef __OLED_H__
+#define __OLED_H__
+
 #include "oled_config.h"
 #include "commen_config.h"
 #ifdef use_oled
@@ -42,3 +45,5 @@ void OLED_ShowPicture(uint8_t x,uint8_t y,uint8_t sizex,uint8_t sizey,uint8_t BM
 void OLED_Init(void);
 
 #endif
+
+#endif // __OLED_H__

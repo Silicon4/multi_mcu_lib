@@ -1,3 +1,6 @@
+#ifndef __OLED_CONFIG_H__
+#define __OLED_CONFIG_H__
+
 #include "all_config.h"
 #include "mcu_interface.h"
 
@@ -26,3 +29,5 @@ void set_res(uint8_t pin_stat);
 #endif
 
 #endif
+
+#endif // __OLED_CONFIG_H__
